@@ -12,7 +12,6 @@
 #include "fileio.h"
 #include "formats/jpeg.h"
 #include "formats/png.h"
-#include "formats/zip.h"
 #include "leanify.h"
 #include "version.h"
 
@@ -89,10 +88,7 @@ void PrintInfo() {
           "\n"
           "JPEG options:\n"
           "  --jpeg-keep-all               Do not remove any metadata or comments in JPEG.\n"
-          "  --jpeg-arithmetic             Use arithmetic coding for JPEG.\n"
-          "\n"
-          "ZIP options:\n"
-          "  --zip-deflate                 Try deflate even if not compressed originally.\n";
+          "  --jpeg-arithmetic             Use arithmetic coding for JPEG.\n";
 
   PauseIfNotTerminal();
 }
@@ -186,9 +182,6 @@ int main(int argc, char** argv) {
           } else if (STRCMP(argv[i] + j + 1, "jpeg-arithmetic") == 0) {
             j += 15;
             Jpeg::force_arithmetic_coding_ = true;
-          } else if (STRCMP(argv[i] + j + 1, "zip-deflate") == 0) {
-            j += 11;
-            Zip::force_deflate_ = true;
           } else {
 #ifdef _WIN32
             char mbs[64] = { 0 };
